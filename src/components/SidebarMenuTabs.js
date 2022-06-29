@@ -1,39 +1,26 @@
-import { Fragment, useState } from "react";
-import { NavLink, Outlet, Route, Routes, useLocation } from "react-router-dom";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Dialog, Transition } from "@headlessui/react";
+import FoldersSidebar from "./FoldersSidebar";
 
-import {
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-  FolderIcon,
-  DocumentAddIcon,
-  FolderAddIcon,
-} from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
+import { HomeIcon, UsersIcon, XIcon } from "@heroicons/react/outline";
 
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
   { name: "Folders", href: "#", icon: UsersIcon, current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const SidebarMenuTabs = ({ sidebarOpen, setSidebarOpen, onAddBtnClick }) => {
+const SidebarMenuTabs = ({
+  sidebarOpen,
+  setSidebarOpen,
+  folders,
+  setFolders,
+}) => {
   let location = useLocation();
-  const tab = location.pathname;
 
   return (
     <div>
@@ -93,29 +80,20 @@ const SidebarMenuTabs = ({ sidebarOpen, setSidebarOpen, onAddBtnClick }) => {
               </div>
               <div className="mt-5 flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-100 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                        "group rounded-md py-2 px-2 flex items-center text-base font-medium"
-                      )}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-4 flex-shrink-0 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
-                  ))}
+                  <NavLink
+                    to={`/dashboard`}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "bg-gray-100 text-gray-700 group rounded-md py-2 px-2 flex items-center text-base font-medium"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group rounded-md py-2 px-2 flex items-center text-base font-medium"
+                    }
+                  >
+                    <HomeIcon
+                      className="text-gray-500 mr-4 flex-shrink-0 h-6 w-6"
+                      aria-hidden="true"
+                    />
+                    Dashboard
+                  </NavLink>
                 </nav>
               </div>
             </div>
@@ -143,8 +121,8 @@ const SidebarMenuTabs = ({ sidebarOpen, setSidebarOpen, onAddBtnClick }) => {
                 to={`/dashboard`}
                 className={({ isActive }) =>
                   isActive
-                    ? " bg-gray-100 text-gray-900 group rounded-md py-2 px-2 flex items-center text-sm font-medium"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 group rounded-md py-2 px-2 flex items-center text-sm font-medium"
+                    ? " bg-gray-100 text-gray-700 group rounded-md py-2 px-2 flex items-center text-sm font-medium"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-700 group rounded-md py-2 px-2 flex items-center text-sm font-medium"
                 }
               >
                 <HomeIcon
@@ -152,48 +130,14 @@ const SidebarMenuTabs = ({ sidebarOpen, setSidebarOpen, onAddBtnClick }) => {
                     (({ isActive }) =>
                       isActive
                         ? "text-gray-400 mr-3 flex-shrink-0 h-6 w-6"
-                        : "text-gray-300 group-hover:text-gray-500",
+                        : "text-gray-300 group-hover:text-gray-400",
                     "mr-3 flex-shrink-0 h-6 w-6 text-gray-500")
                   }
                   aria-hidden="true"
                 />
                 Dashboard
               </NavLink>
-              <p className="group cursor-pointer text-gray-600 hover:bg-gray-50 hover:text-gray-900 group rounded-md py-2 px-2 flex items-center text-sm font-medium">
-                <FolderIcon
-                  className={
-                    (({ isActive }) =>
-                      isActive
-                        ? "text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
-                        : "text-gray-400 group-hover:text-gray-500",
-                    "mr-3 flex-shrink-0 h-6 w-6 text-gray-500")
-                  }
-                  aria-hidden="true"
-                />
-                Folders
-                <DocumentAddIcon className="h-5 w-5 invisible  hover:bg-gray-300 hover:rounded-md group-hover:visible mr-3 flex-shrink-0 ml-16 text-gray-400 group" />
-                <FolderAddIcon className="h-5 w-5 invisible hover:bg-gray-300 hover:rounded-md group-hover:visible mr-3 flex-shrink-0  text-gray-400" />
-              </p>
-              <div class="relative flex flex-col items-center group">
-                <svg
-                  class="w-5 h-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <div class="absolute bottom-0 flex flex-col items-center hidden mb-6 group-hover:flex">
-                  <span class="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap bg-black shadow-lg">
-                    A top aligned tooltip.
-                  </span>
-                  <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
-                </div>
-              </div>
+              <FoldersSidebar folders={folders} setFolders={setFolders} />
             </nav>
           </div>
         </div>

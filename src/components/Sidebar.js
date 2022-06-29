@@ -24,20 +24,15 @@ function classNames(...classes) {
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [tab, setTab] = useState([]);
-
-  const onAddBtnClick = () => {
-    setTab(tab.concat(<Tab />));
-  };
-
-  console.log(tab);
+  const [folders, setFolders] = useState([]);
 
   return (
     <>
       <SidebarMenuTabs
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
-        onAddBtnClick={onAddBtnClick}
+        folders={folders}
+        setFolders={setFolders}
       />
 
       <div>
