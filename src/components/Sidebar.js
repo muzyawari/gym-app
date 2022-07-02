@@ -53,8 +53,14 @@ export default function Sidebar() {
                     <div className="relative w-full text-gray-400 focus-within:text-gray-600">
                       <Routes>
                         <Route path="/" element={<Home />}></Route>
-                        <Route path="dashboard" element={<Home />}></Route>
-                        <Route path="folders" element={<Folders />}></Route>
+                        <Route
+                          path="dashboard"
+                          element={<Home folder={folders} />}
+                        ></Route>
+                        <Route
+                          path="folders/:folder"
+                          element={<Folders />}
+                        ></Route>
                       </Routes>
                     </div>
                   </div>

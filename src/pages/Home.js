@@ -11,10 +11,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Home() {
+export default function Home({ folders }) {
   return (
     <div className="mt-5">
-      <Tab />
+      <Tab folders={folders} />
       <div className="block h-full w-full">fasdf</div>
     </div>
   );

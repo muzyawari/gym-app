@@ -1,10 +1,12 @@
 import React from "react";
-import Tab from "../components/Tab";
+
+import { useParams } from "react-router-dom";
 
 const Folders = () => {
+  const { folder } = useParams();
   return (
     <>
-      <div>Folders</div>
+      <div>{folder}</div>
     </>
   );
 };

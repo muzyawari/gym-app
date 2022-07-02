@@ -5,11 +5,6 @@ import FoldersSidebar from "./FoldersSidebar";
 
 import { HomeIcon, UsersIcon, XIcon } from "@heroicons/react/outline";
 
-const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Folders", href: "#", icon: UsersIcon, current: false },
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -94,6 +89,7 @@ const SidebarMenuTabs = ({
                     />
                     Dashboard
                   </NavLink>
+                  <FoldersSidebar folders={folders} setFolders={setFolders} />
                 </nav>
               </div>
             </div>
