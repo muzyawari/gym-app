@@ -18,6 +18,12 @@ import {
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 
+const userNavigation = [
+  { name: "Your Profile", href: "#" },
+  { name: "Settings", href: "#" },
+  { name: "Sign out", href: "#" },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -65,20 +71,22 @@ export default function Sidebar() {
                     </div>
                   </div>
                 </div>
-                <div className="ml-3 flex items-center md:ml-6">
+                <div className="ml-4 flex items-center md:ml-6">
                   <button
                     type="button"
                     className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
+                    <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
 
                   {/* Profile dropdown */}
-                  {/* <Menu as="div" className="ml-3 relative">
+                  <Menu as="div" className="ml-3 relative">
                     <div>
-                      <Menu.Button>
+                      <Menu.Button className="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span className="sr-only">Open user menu</span>
                         <img
-                          className="h-7 w-7 rounded-full"
+                          className="h-8 w-8 rounded-full"
                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                           alt=""
                         />
@@ -111,7 +119,7 @@ export default function Sidebar() {
                         ))}
                       </Menu.Items>
                     </Transition>
-                  </Menu> */}
+                  </Menu>
                 </div>
               </div>
             </div>
