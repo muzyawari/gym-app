@@ -7,6 +7,7 @@ function DashboardProvider({ children }) {
 
   const value = {
     folders,
+    setFolders,
   };
 
   return (

@@ -1,18 +1,17 @@
 import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon, ChevronLeftIcon } from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 
-import Example from "../Example";
+import ExerciseCards from "./FolderComponents/ExerciseCards";
 
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 
 import { useParams } from "react-router-dom";
 
-import SearchExercises from "../components/SearchExercises";
+// import SearchExercises from "../components/SearchExercises";
 
 const Folders = () => {
-  const { folder } = useParams();
   const [open, setOpen] = useState(true);
 
   const [search, setSearch] = useState("");
@@ -40,7 +39,19 @@ const Folders = () => {
     setSearch("");
   };
 
-  const handleExerciseClick = (e) => {};
+  const handleExerciseClick = (itemToAdd) => {
+    const existingExercise = addExercise.find(
+      (exercise) => exercise.id === itemToAdd.id
+    );
+
+    if (!existingExercise) {
+      setAddExercise([...addExercise, { ...itemToAdd }]);
+    } else {
+      return;
+    }
+  };
+
+  console.log(addExercise);
 
   // const filteredItems =
   // query === ""
@@ -77,8 +88,7 @@ const Folders = () => {
         </div>
       </div> */}
 
-      {/* <Example /> */}
-
+      <ExerciseCards addExercise={addExercise} />
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -168,10 +178,7 @@ const Folders = () => {
 
                         <div className="mt-8">
                           <div className="flow-root">
-                            <ul
-                              role="list"
-                              className="-my-6 divide-y divide-gray-200"
-                            >
+                            <ul className="-my-6 divide-y divide-gray-200">
                               {exercises.map((exercise) => (
                                 <li key={exercise.id} className="py-6 flex">
                                   <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
@@ -222,7 +229,12 @@ const Folders = () => {
                                       </div>
 
                                       <div className="flex ">
-                                        <button className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-700 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                                        <button
+                                          onClick={() =>
+                                            handleExerciseClick(exercise)
+                                          }
+                                          className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-700 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                                        >
                                           <span className="relative px-4 py-1 transition-all ease-in duration-75 bg-white  text-sm rounded-md group-hover:bg-opacity-0">
                                             Add
                                           </span>

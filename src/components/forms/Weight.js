@@ -2,14 +2,9 @@ import React from "react";
 import { EditText, EditTextarea } from "react-edit-text";
 import "react-edit-text/dist/index.css";
 
-import SelectDropdownWeight from "./SelectDropdownWeight";
-
 const Weight = () => {
-  const [text, setText] = React.useState("This is a controlled component");
   const [price, setPrice] = React.useState("");
-  const [textarea, setTextarea] = React.useState(
-    "This is a controlled text area component"
-  );
+
   const formatPrice = (val) => Math.round(parseFloat(val));
   const handleChange = (e, setFn) => {
     setFn(e.target.value);
@@ -19,7 +14,7 @@ const Weight = () => {
   };
   return (
     <React.Fragment>
-      <span className="inline-flex items-center px-3 rounded-l-md border h-[2.2rem] mt-[2.5px]  border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+      <span className="inline-flex items-center px-3 rounded-l-md border h-[2.2rem] mt-[2.5px]  border-gray-300 bg-gray-50 text-gray-500 text-sm">
         Set 1
       </span>
       <EditText

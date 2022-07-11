@@ -1,22 +1,10 @@
 import { Fragment, useState } from "react";
-import Home from "../pages/Home";
-import Folders from "../pages/Folders";
-import SidebarMenuTabs from "./SidebarMenuTabs";
-import Tab from "./Tab";
-import { NavLink, Outlet, Route, Routes } from "react-router-dom";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import {
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-} from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
+import Home from "../../pages/Home";
+import Folders from "../../pages/Folders";
+import SidebarMenuTabs from "./SidebarComponents/SidebarMenuTabs";
+import { Route, Routes } from "react-router-dom";
+import { Menu, Transition } from "@headlessui/react";
+import { BellIcon, MenuAlt2Icon } from "@heroicons/react/outline";
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
