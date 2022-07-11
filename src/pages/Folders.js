@@ -40,6 +40,8 @@ const Folders = () => {
     setSearch("");
   };
 
+  const handleExerciseClick = (e) => {};
+
   // const filteredItems =
   // query === ""
   // 	? []
